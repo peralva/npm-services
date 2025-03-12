@@ -1,22 +1,32 @@
-# @peralva/npm-template
+# @peralva/services
 
-NPM Template
+Services
 
-[![NPM Version](https://img.shields.io/npm/v/%40peralva%2Fnpm-template)](https://www.npmjs.com/package/@peralva/npm-template?activeTab=versions)
-[![GitHub Release Date](https://img.shields.io/github/release-date/peralva/npm-template)](https://github.com/peralva/npm-template/releases)
-[![GitHub License](https://img.shields.io/github/license/peralva/npm-template)](https://github.com/peralva/npm-template?tab=MIT-1-ov-file#readme)
-[![NPM Downloads](https://img.shields.io/npm/dm/%40peralva%2Fnpm-template)](https://www.npmjs.com/package/@peralva/npm-template)
-[![NPM Publish](https://github.com/peralva/npm-template/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/peralva/npm-template/actions/workflows/npm-publish.yml)
+[![NPM Version](https://img.shields.io/npm/v/%40peralva%2Fservices)](https://www.npmjs.com/package/@peralva/services?activeTab=versions)
+[![GitHub Release Date](https://img.shields.io/github/release-date/peralva/npm-services)](https://github.com/peralva/npm-services/releases)
+[![GitHub License](https://img.shields.io/github/license/peralva/npm-services)](https://github.com/peralva/npm-services?tab=MIT-1-ov-file#readme)
+[![NPM Downloads](https://img.shields.io/npm/dm/%40peralva%2Fservices)](https://www.npmjs.com/package/@peralva/services)
+[![NPM Publish](https://github.com/peralva/npm-services/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/peralva/npm-services/actions/workflows/npm-publish.yml)
 
 ## Installation
 
 ```bash
-npm install --save @peralva/npm-template
+npm install --save @peralva/services
 ```
 
 ## Usage
 
 ```ts
-import { npmTemplate } from '@peralva/npm-template';
-console.log(npmTemplate);
+import { services } from '@peralva/services';
+
+const response = await services({
+	url: 'https://jsonplaceholder.typicode.com/posts',
+	method: 'GET',
+});
+
+if (response.status === 200) {
+	response.body.forEach((value) => {
+		console.log(value.title);
+	});
+}
 ```
