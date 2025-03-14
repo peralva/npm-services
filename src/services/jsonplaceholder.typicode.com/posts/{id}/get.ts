@@ -1,7 +1,7 @@
 import Service from '../../..';
 import Method from '../../../../interfaces/Method';
 
-class Class implements Service {
+export default class Class implements Service {
 	url = 'https://jsonplaceholder.typicode.com/posts/' as const;
 	method = 'GET' as const;
 
@@ -35,6 +35,3 @@ class Class implements Service {
 		} as typeof this.response;
 	}
 }
-
-const jsonplaceholderTypicodeComPostsIdGet: Class = new Class();
-export default jsonplaceholderTypicodeComPostsIdGet;

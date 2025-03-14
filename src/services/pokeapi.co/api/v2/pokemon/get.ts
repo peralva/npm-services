@@ -3,7 +3,7 @@ import Method from '../../../../../interfaces/Method';
 
 type Url = typeof Class.prototype.url;
 
-class Class implements Service {
+export default class Class implements Service {
 	url = 'https://pokeapi.co/api/v2/pokemon' as const;
 	method = 'GET' as const;
 
@@ -40,6 +40,3 @@ class Class implements Service {
 		} as typeof this.response;
 	}
 }
-
-const pokeapiCoApiV2PokemonGet: Class = new Class();
-export default pokeapiCoApiV2PokemonGet;

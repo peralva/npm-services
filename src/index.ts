@@ -1,29 +1,45 @@
 import getQueryValues from './utils/getQueryValues';
 import QueryValueType from './interfaces/QueryValueType';
 
-import jsonplaceholderTypicodeComPostsGet from './services/jsonplaceholder.typicode.com/posts/get';
-import jsonplaceholderTypicodeComPostsIdGet from './services/jsonplaceholder.typicode.com/posts/{id}/get';
-import pokeapiCoApiV2PokemonGet from './services/pokeapi.co/api/v2/pokemon/get';
-import apiJamefComBrAuthV1LoginPost from './services/api.jamef.com.br/auth/v1/login/post';
-import apiQaJamefComBrAuthV1LoginPost from './services/api-qa.jamef.com.br/auth/v1/login/post';
+import ApiJamefComBrAuthV1LoginPost from './services/api.jamef.com.br/auth/v1/login/post';
+import ApiJamefComBrDocumentosV1NotaFiscalPost from './services/api.jamef.com.br/documentos/v1/nota-fiscal/post';
+import ApiQaJamefComBrAuthV1LoginPost from './services/api-qa.jamef.com.br/auth/v1/login/post';
+import ApiQaJamefComBrDocumentosV1NotaFiscalPost from './services/api-qa.jamef.com.br/documentos/v1/nota-fiscal/post';
+import JsonplaceholderTypicodeComPostsGet from './services/jsonplaceholder.typicode.com/posts/get';
+import JsonplaceholderTypicodeComPostsIdGet from './services/jsonplaceholder.typicode.com/posts/{id}/get';
+import PokeapiCoApiV2PokemonGet from './services/pokeapi.co/api/v2/pokemon/get';
 
 /*
 	Quando importar novo serviço, lembrar de adicionar uma linha no tipo Responses incrementando o
 	índice
 */
 const SERVICES: [
-	typeof jsonplaceholderTypicodeComPostsGet,
-	typeof jsonplaceholderTypicodeComPostsIdGet,
-	typeof pokeapiCoApiV2PokemonGet,
-	typeof apiJamefComBrAuthV1LoginPost,
-	typeof apiQaJamefComBrAuthV1LoginPost,
+	ApiJamefComBrAuthV1LoginPost,
+	ApiJamefComBrDocumentosV1NotaFiscalPost,
+	ApiQaJamefComBrAuthV1LoginPost,
+	ApiQaJamefComBrDocumentosV1NotaFiscalPost,
+	JsonplaceholderTypicodeComPostsGet,
+	JsonplaceholderTypicodeComPostsIdGet,
+	PokeapiCoApiV2PokemonGet,
 ] = [
-	jsonplaceholderTypicodeComPostsGet,
-	jsonplaceholderTypicodeComPostsIdGet,
-	pokeapiCoApiV2PokemonGet,
-	apiJamefComBrAuthV1LoginPost,
-	apiQaJamefComBrAuthV1LoginPost,
+	new ApiJamefComBrAuthV1LoginPost(),
+	new ApiJamefComBrDocumentosV1NotaFiscalPost(),
+	new ApiQaJamefComBrAuthV1LoginPost(),
+	new ApiQaJamefComBrDocumentosV1NotaFiscalPost(),
+	new JsonplaceholderTypicodeComPostsGet(),
+	new JsonplaceholderTypicodeComPostsIdGet(),
+	new PokeapiCoApiV2PokemonGet(),
 ] as const;
+
+export type {
+	ApiJamefComBrAuthV1LoginPost,
+	ApiJamefComBrDocumentosV1NotaFiscalPost,
+	ApiQaJamefComBrAuthV1LoginPost,
+	ApiQaJamefComBrDocumentosV1NotaFiscalPost,
+	JsonplaceholderTypicodeComPostsGet,
+	JsonplaceholderTypicodeComPostsIdGet,
+	PokeapiCoApiV2PokemonGet,
+};
 
 type Service<T extends number> = (typeof SERVICES)[T];
 type Request<T extends number> = Service<T>['request'];
@@ -37,6 +53,8 @@ type Responses<T extends Requests> = (
 	T extends Request<2> ? Response<2> :
 	T extends Request<3> ? Response<3> :
 	T extends Request<4> ? Response<4> :
+	T extends Request<5> ? Response<5> :
+	T extends Request<6> ? Response<6> :
 	never
 );
 
@@ -48,6 +66,8 @@ export const services = async <T extends Requests>(
 	);
 
 	if (!service) throw new Error('Not implemented');
+
+	if ('before' in service) service.before(request as never);
 
 	let queryString = '';
 
@@ -94,10 +114,11 @@ export const services = async <T extends Requests>(
 	if ('headers' in request) init.headers = request.headers;
 
 	if ('body' in request) {
-		init.body =
-			typeof request.body === 'string'
-				? request.body
-				: JSON.stringify(request.body);
+		if (typeof request.body === 'string') {
+			init.body = request.body;
+		} else {
+			init.body = JSON.stringify(request.body);
+		}
 	}
 
 	return (await service.getResponse(
