@@ -1,4 +1,5 @@
 {
 	"extends": "@peralva/tsconfig",
+	"compilerOptions": { "removeComments": false },
 	"include": ["src/**/*.ts"]
 }
