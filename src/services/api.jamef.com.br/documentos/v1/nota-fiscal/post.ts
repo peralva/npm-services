@@ -431,7 +431,7 @@ export default class Class implements Service {
 				status: 429;
 				body: {
 					/**
-					 * @example Quota has been exceeded
+					 * @example 'Quota has been exceeded'
 					 */
 					error: string;
 				};
