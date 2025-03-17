@@ -4,9 +4,11 @@ import QueryValueType from './interfaces/QueryValueType';
 import ApiJamefComBrAuthV1LoginPost from './services/api.jamef.com.br/auth/v1/login/post';
 import ApiJamefComBrConsultaV1RastreamentoGet from './services/api.jamef.com.br/consulta/v1/rastreamento/get';
 import ApiJamefComBrDocumentosV1NotaFiscalPost from './services/api.jamef.com.br/documentos/v1/nota-fiscal/post';
+import ApiJamefComBrOperacaoV1EtiquetaChaveNotaFiscalGet from './services/api.jamef.com.br/operacao/v1/etiqueta/{chaveNotaFiscal}/get';
 import ApiQaJamefComBrAuthV1LoginPost from './services/api-qa.jamef.com.br/auth/v1/login/post';
 import ApiQaJamefComBrConsultaV1RastreamentoGet from './services/api-qa.jamef.com.br/consulta/v1/rastreamento/get';
 import ApiQaJamefComBrDocumentosV1NotaFiscalPost from './services/api-qa.jamef.com.br/documentos/v1/nota-fiscal/post';
+import ApiQaJamefComBrOperacaoV1EtiquetaChaveNotaFiscalGet from './services/api-qa.jamef.com.br/operacao/v1/etiqueta/{chaveNotaFiscal}/get';
 import JsonplaceholderTypicodeComPostsGet from './services/jsonplaceholder.typicode.com/posts/get';
 import JsonplaceholderTypicodeComPostsIdGet from './services/jsonplaceholder.typicode.com/posts/{id}/get';
 import PokeapiCoApiV2PokemonGet from './services/pokeapi.co/api/v2/pokemon/get';
@@ -19,9 +21,11 @@ const SERVICES: [
 	ApiJamefComBrAuthV1LoginPost,
 	ApiJamefComBrConsultaV1RastreamentoGet,
 	ApiJamefComBrDocumentosV1NotaFiscalPost,
+	ApiJamefComBrOperacaoV1EtiquetaChaveNotaFiscalGet,
 	ApiQaJamefComBrAuthV1LoginPost,
 	ApiQaJamefComBrConsultaV1RastreamentoGet,
 	ApiQaJamefComBrDocumentosV1NotaFiscalPost,
+	ApiQaJamefComBrOperacaoV1EtiquetaChaveNotaFiscalGet,
 	JsonplaceholderTypicodeComPostsGet,
 	JsonplaceholderTypicodeComPostsIdGet,
 	PokeapiCoApiV2PokemonGet,
@@ -29,9 +33,11 @@ const SERVICES: [
 	new ApiJamefComBrAuthV1LoginPost(),
 	new ApiJamefComBrConsultaV1RastreamentoGet(),
 	new ApiJamefComBrDocumentosV1NotaFiscalPost(),
+	new ApiJamefComBrOperacaoV1EtiquetaChaveNotaFiscalGet(),
 	new ApiQaJamefComBrAuthV1LoginPost(),
 	new ApiQaJamefComBrConsultaV1RastreamentoGet(),
 	new ApiQaJamefComBrDocumentosV1NotaFiscalPost(),
+	new ApiQaJamefComBrOperacaoV1EtiquetaChaveNotaFiscalGet(),
 	new JsonplaceholderTypicodeComPostsGet(),
 	new JsonplaceholderTypicodeComPostsIdGet(),
 	new PokeapiCoApiV2PokemonGet(),
@@ -41,9 +47,11 @@ export type {
 	ApiJamefComBrAuthV1LoginPost,
 	ApiJamefComBrConsultaV1RastreamentoGet,
 	ApiJamefComBrDocumentosV1NotaFiscalPost,
+	ApiJamefComBrOperacaoV1EtiquetaChaveNotaFiscalGet,
 	ApiQaJamefComBrAuthV1LoginPost,
 	ApiQaJamefComBrConsultaV1RastreamentoGet,
 	ApiQaJamefComBrDocumentosV1NotaFiscalPost,
+	ApiQaJamefComBrOperacaoV1EtiquetaChaveNotaFiscalGet,
 	JsonplaceholderTypicodeComPostsGet,
 	JsonplaceholderTypicodeComPostsIdGet,
 	PokeapiCoApiV2PokemonGet,
@@ -65,6 +73,8 @@ type Responses<T extends Requests> = (
 	T extends Request<6> ? Response<6> :
 	T extends Request<7> ? Response<7> :
 	T extends Request<8> ? Response<8> :
+	T extends Request<9> ? Response<9> :
+	T extends Request<10> ? Response<10> :
 	never
 );
 
