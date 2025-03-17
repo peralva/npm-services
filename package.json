@@ -3,6 +3,10 @@
 	"bugs": {
 		"url": "https://github.com/peralva/npm-services/issues"
 	},
+	"dependencies": {
+		"@peralva/custom-date": "^1.0.2",
+		"@peralva/validate-cpf-cnpj": "^1.2.0"
+	},
 	"description": "Services",
 	"devDependencies": {
 		"@eslint/js": "^9.22.0",
@@ -34,7 +38,6 @@
 	],
 	"homepage": "https://github.com/peralva/npm-services#readme",
 	"keywords": [
-		"npm",
 		"services"
 	],
 	"license": "MIT",
@@ -56,5 +59,5 @@
 		"start": "node --enable-source-maps --inspect --trace-warnings --watch dist",
 		"test": "node --test dist"
 	},
-	"version": "1.0.0"
+	"version": "1.0.1"
 }

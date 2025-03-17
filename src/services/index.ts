@@ -25,5 +25,7 @@ export default class Service {
 		method: typeof this.method,
 	) => boolean;
 
+	declare before?: (request: never) => void;
+
 	declare getResponse: (response: Response) => Promise<unknown>;
 }
