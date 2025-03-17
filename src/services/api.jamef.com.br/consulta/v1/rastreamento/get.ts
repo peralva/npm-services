@@ -198,38 +198,38 @@ export default class Class implements Service {
 								 * @example 'https://jamef-ms-prod-s3uploadfiles.s3.amazonaws.com/140033495181/DIGITALIZACAO/140033495181.pdf'
 								 */
 								urlComprovanteEntrega: string;
-
-								eventosRastreio: {
-									data: Date;
-
-									/**
-									 * @example 'DOCUMENTO EMITIDO'
-									 */
-									status: string;
-
-									/**
-									 * @example '00'
-									 */
-									codigoOcorrencia: string;
-
-									localOrigem: {
-										/**
-										 * @example 'SERRA'
-										 */
-										cidade: string;
-
-										/**
-										 * @example 'ES'
-										 */
-										uf: string;
-									};
-
-									localDestino: {
-										cidade: string;
-										uf: string;
-									};
-								}[];
 							};
+
+							eventosRastreio: {
+								data: Date;
+
+								/**
+								 * @example 'DOCUMENTO EMITIDO'
+								 */
+								status: string;
+
+								/**
+								 * @example '00'
+								 */
+								codigoOcorrencia: string;
+
+								localOrigem: {
+									/**
+									 * @example 'SERRA'
+									 */
+									cidade: string;
+
+									/**
+									 * @example 'ES'
+									 */
+									uf: string;
+								};
+
+								localDestino: {
+									cidade: string;
+									uf: string;
+								};
+							}[];
 						}[];
 					}[];
 				};
@@ -276,11 +276,11 @@ export default class Class implements Service {
 			result.body.dado.forEach((dado) => {
 				dado.rastreamento.forEach((rastramento) => {
 					rastramento.frete.previsaoEntrega = new Date(
-						rastramento.frete.previsaoEntrega,
+						`${rastramento.frete.previsaoEntrega}T00:00:00-03:00`,
 					);
 
-					rastramento.frete.eventosRastreio.forEach((eventoRastreio) => {
-						eventoRastreio.data = new Date(eventoRastreio.data);
+					rastramento.eventosRastreio.forEach((eventoRastreio) => {
+						eventoRastreio.data = new Date(`${eventoRastreio.data}-03:00`);
 					});
 				});
 			});
