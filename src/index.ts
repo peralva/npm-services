@@ -82,7 +82,7 @@ export const services = async <T extends Requests>(
 	request: T,
 ): Promise<Responses<T>> => {
 	const service = SERVICES.find((service) =>
-		service.instanceOfThisClass(request),
+		service.instanceOfThisClass(request as never),
 	);
 
 	if (!service) throw new Error('Not implemented');

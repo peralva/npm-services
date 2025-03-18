@@ -450,15 +450,8 @@ export default class Class implements Service {
 				body: Errors;
 		  });
 
-	instanceOfThisClass(request: unknown): boolean {
-		return (
-			typeof request === 'object' &&
-			request !== null &&
-			'method' in request &&
-			request.method === this.method &&
-			'url' in request &&
-			request.url === this.url
-		);
+	instanceOfThisClass(request: this['request']): boolean {
+		return request.method === this.method && request.url === this.url;
 	}
 
 	async getResponse(response: Response): Promise<typeof this.response> {

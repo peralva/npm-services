@@ -19,14 +19,9 @@ export default class Class implements Service {
 
 	declare response: ApiJamefComBrOperacaoV1EtiquetaChaveNotaFiscalGet['response'];
 
-	instanceOfThisClass(request: unknown): boolean {
+	instanceOfThisClass(request: this['request']): boolean {
 		return (
-			typeof request === 'object' &&
-			request !== null &&
-			'method' in request &&
 			request.method === this.method &&
-			'url' in request &&
-			typeof request.url === 'string' &&
 			request.url.length > this.url.length &&
 			request.url.substring(0, this.url.length) === this.url
 		);
