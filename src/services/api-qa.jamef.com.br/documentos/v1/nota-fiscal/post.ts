@@ -1,5 +1,4 @@
 import Service from '../../../..';
-import Method from '../../../../../interfaces/Method';
 import ApiJamefComBrDocumentosV1NotaFiscalPost from '../../../../api.jamef.com.br/documentos/v1/nota-fiscal/post';
 
 const apiJamefComBrDocumentosV1NotaFiscalPost: ApiJamefComBrDocumentosV1NotaFiscalPost =
@@ -20,8 +19,15 @@ export default class Class implements Service {
 
 	declare response: ApiJamefComBrDocumentosV1NotaFiscalPost['response'];
 
-	instanceOfThisClass(url: string, method: Method): boolean {
-		return url === this.url && method === this.method;
+	instanceOfThisClass(request: unknown): boolean {
+		return (
+			typeof request === 'object' &&
+			request !== null &&
+			'method' in request &&
+			request.method === this.method &&
+			'url' in request &&
+			request.url === this.url
+		);
 	}
 
 	async getResponse(

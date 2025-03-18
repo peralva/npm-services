@@ -1,5 +1,4 @@
 import Service from '../../../../..';
-import Method from '../../../../../../interfaces/Method';
 
 type CommonResponseBody<T> = {
 	/** Código de status HTTP indicando a situação
@@ -164,11 +163,16 @@ export default class Class implements Service {
 				body: Errors;
 		  });
 
-	instanceOfThisClass(url: string, method: Method): boolean {
+	instanceOfThisClass(request: unknown): boolean {
 		return (
-			url.substring(0, this.url.length) === this.url &&
-			url.length > this.url.length &&
-			method === this.method
+			typeof request === 'object' &&
+			request !== null &&
+			'method' in request &&
+			request.method === this.method &&
+			'url' in request &&
+			typeof request.url === 'string' &&
+			request.url.length > this.url.length &&
+			request.url.substring(0, this.url.length) === this.url
 		);
 	}
 

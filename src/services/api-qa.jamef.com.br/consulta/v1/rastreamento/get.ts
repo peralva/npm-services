@@ -1,5 +1,4 @@
 import Service from '../../../..';
-import Method from '../../../../../interfaces/Method';
 import ApiJamefComBrConsultaV1RastreamentoGet from '../../../../api.jamef.com.br/consulta/v1/rastreamento/get';
 
 const apiJamefComBrConsultaV1RastreamentoGet: ApiJamefComBrConsultaV1RastreamentoGet =
@@ -20,8 +19,15 @@ export default class Class implements Service {
 
 	declare response: ApiJamefComBrConsultaV1RastreamentoGet['response'];
 
-	instanceOfThisClass(url: string, method: Method): boolean {
-		return url === this.url && method === this.method;
+	instanceOfThisClass(request: unknown): boolean {
+		return (
+			typeof request === 'object' &&
+			request !== null &&
+			'method' in request &&
+			request.method === this.method &&
+			'url' in request &&
+			request.url === this.url
+		);
 	}
 
 	async getResponse(
