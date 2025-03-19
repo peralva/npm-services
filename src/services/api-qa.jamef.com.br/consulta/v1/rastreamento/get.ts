@@ -1,33 +1,26 @@
 import Service from '../../../..';
-import ApiJamefComBrConsultaV1RastreamentoGet from '../../../../api.jamef.com.br/consulta/v1/rastreamento/get';
+import Production from '../../../../api.jamef.com.br/consulta/v1/rastreamento/get';
 
-const apiJamefComBrConsultaV1RastreamentoGet: ApiJamefComBrConsultaV1RastreamentoGet =
-	new ApiJamefComBrConsultaV1RastreamentoGet();
+const production: Production = new Production();
 
 export default class Class implements Service {
 	url = 'https://api-qa.jamef.com.br/consulta/v1/rastreamento' as const;
 
-	method: ApiJamefComBrConsultaV1RastreamentoGet['method'] =
-		apiJamefComBrConsultaV1RastreamentoGet.method;
+	method: Production['method'] = production.method;
 
-	declare request: Omit<
-		ApiJamefComBrConsultaV1RastreamentoGet['request'],
-		'url'
-	> & {
+	declare request: Omit<Production['request'], 'url'> & {
 		url: typeof Class.prototype.url;
 	};
 
-	declare response: ApiJamefComBrConsultaV1RastreamentoGet['response'];
+	declare response: Production['response'];
 
 	instanceOfThisClass(request: this['request']): boolean {
 		return request.method === this.method && request.url === this.url;
 	}
 
 	async getResponse(
-		...args: Parameters<
-			typeof apiJamefComBrConsultaV1RastreamentoGet.getResponse
-		>
-	): ReturnType<ApiJamefComBrConsultaV1RastreamentoGet['getResponse']> {
-		return apiJamefComBrConsultaV1RastreamentoGet.getResponse(...args);
+		...args: Parameters<typeof production.getResponse>
+	): ReturnType<Production['getResponse']> {
+		return production.getResponse(...args);
 	}
 }
