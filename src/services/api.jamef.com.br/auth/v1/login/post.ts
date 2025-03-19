@@ -28,8 +28,8 @@ export default class Class implements Service {
 	method = 'POST' as const;
 
 	declare request: {
-		url: typeof Class.prototype.url;
-		method: typeof Class.prototype.method;
+		url: Class['url'];
+		method: Class['method'];
 		headers: { 'Content-Type': 'application/json' };
 		body: {
 			/** Email cadastrado no portal developers
@@ -101,7 +101,7 @@ export default class Class implements Service {
 				};
 		  });
 
-	instanceOfThisClass(request: this['request']): boolean {
+	instanceOfThisClass(request: Service['request']): boolean {
 		return request.method === this.method && request.url === this.url;
 	}
 

@@ -5,8 +5,8 @@ export default class Class implements Service {
 	method = 'GET' as const;
 
 	declare request: {
-		url: `${typeof Class.prototype.url}${number}`;
-		method: typeof Class.prototype.method;
+		url: `${Class['url']}${number}`;
+		method: Class['method'];
 	};
 
 	declare response: {
@@ -19,7 +19,7 @@ export default class Class implements Service {
 		};
 	};
 
-	instanceOfThisClass(request: this['request']): boolean {
+	instanceOfThisClass(request: Service['request']): boolean {
 		return (
 			request.method === this.method &&
 			request.url.length > this.url.length &&

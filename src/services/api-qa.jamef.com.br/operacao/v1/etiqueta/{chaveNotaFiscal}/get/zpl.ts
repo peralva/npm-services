@@ -9,14 +9,16 @@ export default class Class implements Service {
 	method: Production['method'] = production.method;
 
 	declare request: Omit<Production['request'], 'url'> & {
-		url: `${typeof Class.prototype.url}${string}`;
+		url: `${Class['url']}${string}`;
 	};
 
 	declare response: Production['response'];
 
-	instanceOfThisClass(request: this['request']): boolean {
+	instanceOfThisClass(request: Service['request']): boolean {
 		return (
 			request.method === this.method &&
+			'query' in request &&
+			'tipoRetorno' in request.query &&
 			request.query.tipoRetorno === 'ZPL' &&
 			request.url.length > this.url.length &&
 			request.url.substring(0, this.url.length) === this.url

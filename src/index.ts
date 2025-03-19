@@ -1,5 +1,5 @@
 import getQueryValues from './utils/getQueryValues';
-import QueryValueType from './interfaces/QueryValueType';
+import Primitive from './interfaces/Primitive';
 
 import ApiJamefComBrAuthV1LoginPost from './services/api.jamef.com.br/auth/v1/login/post';
 import ApiJamefComBrConsultaV1RastreamentoGet from './services/api.jamef.com.br/consulta/v1/rastreamento/get';
@@ -92,7 +92,7 @@ export const services = async <T extends Requests>(
 	request: T,
 ): Promise<Responses<T>> => {
 	const service = SERVICES.find((service) =>
-		service.instanceOfThisClass(request as never),
+		service.instanceOfThisClass(request),
 	);
 
 	if (!service) throw new Error('Not implemented');
@@ -119,7 +119,7 @@ export const services = async <T extends Requests>(
 				queryString,
 			);
 		} else if (typeof request.query === 'object' && request.query !== null) {
-			const query: Record<string, QueryValueType> = request.query;
+			const query: Record<string, Primitive> = request.query;
 
 			queryString = Object.keys(query).reduce(
 				(previousValue, currentValue, currentIndex) => {
