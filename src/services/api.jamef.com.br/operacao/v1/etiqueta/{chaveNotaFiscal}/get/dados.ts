@@ -1,4 +1,4 @@
-import Service from '../../../../..';
+import Service from '../../../../../..';
 
 type CommonResponseBody<T> = {
 	/** Código de status HTTP indicando a situação
@@ -166,6 +166,7 @@ export default class Class implements Service {
 	instanceOfThisClass(request: this['request']): boolean {
 		return (
 			request.method === this.method &&
+			request.query.tipoRetorno === 'DADOS' &&
 			request.url.length > this.url.length &&
 			request.url.substring(0, this.url.length) === this.url
 		);
