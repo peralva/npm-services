@@ -45,8 +45,8 @@ export default class Class implements Service {
 	method = 'GET' as const;
 
 	declare request: {
-		url: `${typeof Class.prototype.url}${string}`;
-		method: typeof Class.prototype.method;
+		url: `${Class['url']}${string}`;
+		method: Class['method'];
 		headers: { Authorization: `Bearer ${string}.${string}.${string}` };
 		query: { tipoRetorno: 'DADOS' };
 	};
@@ -163,9 +163,11 @@ export default class Class implements Service {
 				body: Errors;
 		  });
 
-	instanceOfThisClass(request: this['request']): boolean {
+	instanceOfThisClass(request: Service['request']): boolean {
 		return (
 			request.method === this.method &&
+			'query' in request &&
+			'tipoRetorno' in request.query &&
 			request.query.tipoRetorno === 'DADOS' &&
 			request.url.length > this.url.length &&
 			request.url.substring(0, this.url.length) === this.url

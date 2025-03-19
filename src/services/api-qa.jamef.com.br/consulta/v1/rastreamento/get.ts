@@ -9,12 +9,12 @@ export default class Class implements Service {
 	method: Production['method'] = production.method;
 
 	declare request: Omit<Production['request'], 'url'> & {
-		url: typeof Class.prototype.url;
+		url: Class['url'];
 	};
 
 	declare response: Production['response'];
 
-	instanceOfThisClass(request: this['request']): boolean {
+	instanceOfThisClass(request: Service['request']): boolean {
 		return request.method === this.method && request.url === this.url;
 	}
 

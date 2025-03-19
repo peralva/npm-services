@@ -1,5 +1,6 @@
 import Method from '../interfaces/Method';
-import QueryValueType from '../interfaces/QueryValueType';
+import Primitive from '../interfaces/Primitive';
+import Json from '../interfaces/Json';
 
 export default class Service {
 	declare url: string;
@@ -7,17 +8,18 @@ export default class Service {
 
 	declare request: {
 		url: string;
-		method: typeof Service.prototype.method;
+		method: Service['method'];
+		body?: Json;
 		query?:
 			| object
 			| {
 					key: string;
-					value: QueryValueType;
+					value: Primitive;
 			  }[];
 	};
 
 	declare response?: {
-		body?: object | string;
+		body?: Json;
 	};
 
 	declare instanceOfThisClass: (request: this['request']) => boolean;

@@ -1,14 +1,12 @@
 import Service from '../../../..';
 
-type Url = typeof Class.prototype.url;
-
 export default class Class implements Service {
 	url = 'https://pokeapi.co/api/v2/pokemon' as const;
 	method = 'GET' as const;
 
 	declare request: {
-		url: Url;
-		method: typeof Class.prototype.method;
+		url: Class['url'];
+		method: Class['method'];
 		query?: {
 			offset?: number;
 			limit?: number;
@@ -19,16 +17,16 @@ export default class Class implements Service {
 		status: 200;
 		body: {
 			count: number;
-			next: null | `${Url}/?offset=${number}&limit=${number}`;
-			previous: null | `${Url}/?offset=${number}&limit=${number}`;
+			next: null | `${Class['url']}/?offset=${number}&limit=${number}`;
+			previous: null | `${Class['url']}/?offset=${number}&limit=${number}`;
 			results: {
 				name: string;
-				url: `${Url}/${number}/`;
+				url: `${Class['url']}/${number}/`;
 			}[];
 		};
 	};
 
-	instanceOfThisClass(request: this['request']): boolean {
+	instanceOfThisClass(request: Service['request']): boolean {
 		return request.method === this.method && request.url === this.url;
 	}
 

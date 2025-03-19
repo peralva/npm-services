@@ -45,8 +45,8 @@ export default class Class implements Service {
 	method = 'GET' as const;
 
 	declare request: {
-		url: typeof Class.prototype.url;
-		method: typeof Class.prototype.method;
+		url: Class['url'];
+		method: Class['method'];
 		headers: { Authorization: `Bearer ${string}.${string}.${string}` };
 		query: (
 			| {
@@ -257,7 +257,7 @@ export default class Class implements Service {
 				body: Errors;
 		  });
 
-	instanceOfThisClass(request: this['request']): boolean {
+	instanceOfThisClass(request: Service['request']): boolean {
 		return request.method === this.method && request.url === this.url;
 	}
 
