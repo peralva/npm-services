@@ -1,40 +1,32 @@
 import Service from '../../../..';
-import Method from '../../../../../interfaces/Method';
-import ApiJamefComBrDocumentosV1NotaFiscalPost from '../../../../api.jamef.com.br/documentos/v1/nota-fiscal/post';
+import Production from '../../../../api.jamef.com.br/documentos/v1/nota-fiscal/post';
 
-const apiJamefComBrDocumentosV1NotaFiscalPost: ApiJamefComBrDocumentosV1NotaFiscalPost =
-	new ApiJamefComBrDocumentosV1NotaFiscalPost();
+const production: Production = new Production();
 
 export default class Class implements Service {
 	url = 'https://api-qa.jamef.com.br/documentos/v1/nota-fiscal' as const;
 
-	method: ApiJamefComBrDocumentosV1NotaFiscalPost['method'] =
-		apiJamefComBrDocumentosV1NotaFiscalPost.method;
+	method: Production['method'] = production.method;
 
-	declare request: Omit<
-		ApiJamefComBrDocumentosV1NotaFiscalPost['request'],
-		'url'
-	> & {
+	declare request: Omit<Production['request'], 'url'> & {
 		url: typeof Class.prototype.url;
 	};
 
-	declare response: ApiJamefComBrDocumentosV1NotaFiscalPost['response'];
+	declare response: Production['response'];
 
-	instanceOfThisClass(url: string, method: Method): boolean {
-		return url === this.url && method === this.method;
+	instanceOfThisClass(request: this['request']): boolean {
+		return request.method === this.method && request.url === this.url;
 	}
 
 	async getResponse(
-		...args: Parameters<
-			typeof apiJamefComBrDocumentosV1NotaFiscalPost.getResponse
-		>
-	): ReturnType<ApiJamefComBrDocumentosV1NotaFiscalPost['getResponse']> {
-		return apiJamefComBrDocumentosV1NotaFiscalPost.getResponse(...args);
+		...args: Parameters<typeof production.getResponse>
+	): ReturnType<Production['getResponse']> {
+		return production.getResponse(...args);
 	}
 
 	before(
-		...args: Parameters<typeof apiJamefComBrDocumentosV1NotaFiscalPost.before>
-	): ReturnType<ApiJamefComBrDocumentosV1NotaFiscalPost['before']> {
-		return apiJamefComBrDocumentosV1NotaFiscalPost.before(...args);
+		...args: Parameters<typeof production.before>
+	): ReturnType<Production['before']> {
+		return production.before(...args);
 	}
 }

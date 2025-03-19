@@ -20,12 +20,7 @@ export default class Service {
 		body?: object | string;
 	};
 
-	declare instanceOfThisClass: (
-		url: string,
-		method: typeof this.method,
-	) => boolean;
-
+	declare instanceOfThisClass: (request: this['request']) => boolean;
 	declare before?: (request: never) => void;
-
 	declare getResponse: (response: Response) => Promise<unknown>;
 }

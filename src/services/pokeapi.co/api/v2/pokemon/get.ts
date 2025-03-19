@@ -1,5 +1,4 @@
 import Service from '../../../..';
-import Method from '../../../../../interfaces/Method';
 
 type Url = typeof Class.prototype.url;
 
@@ -29,8 +28,8 @@ export default class Class implements Service {
 		};
 	};
 
-	instanceOfThisClass(url: string, method: Method): boolean {
-		return url === this.url && method === this.method;
+	instanceOfThisClass(request: this['request']): boolean {
+		return request.method === this.method && request.url === this.url;
 	}
 
 	async getResponse(response: Response): Promise<typeof this.response> {

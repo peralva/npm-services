@@ -1,5 +1,4 @@
 import Service from '../../..';
-import Method from '../../../../interfaces/Method';
 
 export default class Class implements Service {
 	url = 'https://jsonplaceholder.typicode.com/posts/' as const;
@@ -20,11 +19,11 @@ export default class Class implements Service {
 		};
 	};
 
-	instanceOfThisClass(url: string, method: Method): boolean {
+	instanceOfThisClass(request: this['request']): boolean {
 		return (
-			url.substring(0, this.url.length) === this.url &&
-			url.length > this.url.length &&
-			method === this.method
+			request.method === this.method &&
+			request.url.length > this.url.length &&
+			request.url.substring(0, this.url.length) === this.url
 		);
 	}
 
